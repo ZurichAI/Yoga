@@ -1,0 +1,566 @@
+/* Additional styles for student management */
+
+/* Student management header */
+.student-management-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+#search-input {
+    width: 250px;
+    height: 30px;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+}
+
+/* Container for student page */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: whitesmoke;
+    border: 1px solid #ccc;
+}
+
+.search-container {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+/* Additional table styles */
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+
+/* Right-align the Balance column */
+th[data-sort="balance"], 
+td:nth-child(7) {
+    text-align: right;
+}
+
+th {
+    background-color: #f2f2f2;
+    cursor: pointer;
+    position: relative;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr {
+    height: 30px;
+}
+
+/* Checkbox and radio styling */
+.checkbox-container {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-container label {
+    margin-left: 5px;
+}
+
+.radio-container {
+    margin-bottom: 5px;
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.radio-container input[type="radio"] {
+    margin-right: 5px;
+}
+
+/* Input styling */
+input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #007bff; /* Blue checkboxes */
+}
+
+input[type="radio"] {
+    accent-color: #007bff; /* Blue radio buttons */
+}
+
+        /* Dialog styles */
+        .dialog-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        
+        .dialog-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 400px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dialog-title {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .dialog-content {
+            margin-bottom: 20px;
+        }
+        .dialog-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        /* Individual button styles */
+        #create-comment-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            width: 130px; /* Set the exact width */
+            height: 30px; /* Set the exact height */
+        }
+        
+        #create-payment-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            width: 130px; /* Set the exact width */
+            height: 30px; /* Set the exact height */
+        }
+        
+        #edit-contact-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 6px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            width: 130px; /* Set the exact width */
+            height: 30px; /* Set the exact height */
+        }
+        
+        #create-contact-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 6px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            width: 130px; /* Set the exact width */
+            height: 30px; /* Set the exact height */
+        }
+        
+        #delete-contact-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 6px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            width: 130px; /* Set the exact width */
+            height: 30px; /* Set the exact height */
+        }
+
+        #create-cost-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-weight: bold;
+            width: 130px; /* Set the exact width */
+            height: 30px; /* Set the exact height */
+
+        }
+        
+        #clear-filters-btn {
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 6px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            width: 130px; /* Set the exact width */
+            height: 30px; /* Set the exact height */
+       }
+
+        #cancel-comment-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #save-comment-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #add-comment-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #close-comments-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            font-style: italic;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #cancel-edit-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #save-edit-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #cancel-confirm-edit-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #save-confirm-edit-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #make-inactive-btn {
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #delete-student-btn {
+            background-color: orange;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            letter-spacing: 1px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #cancel-delete-options-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #confirm-delete-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #cancel-confirm-delete-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            font-style: italic;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Payment dialog buttons */
+        #cancel-payment-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #save-payment-dialog-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #cancel-confirm-payment-btn {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            text-transform: uppercase;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        #save-confirm-payment-btn {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 12px;
+            cursor: pointer;
+            margin: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .dialog-input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .filters-container {
+            display: grid;
+            grid-template-columns: 2fr 2fr 1fr 1fr; /* Decreased the width of the third column */
+            grid-template-rows: auto 1fr; /* Two rows */
+            gap: 10px;
+            margin-bottom: 20px;
+            min-height: 300px; /* Minimum height of the container */
+        }
+        .filter-box {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.75em;
+        }
+        
+        .button-container-multi {
+            grid-column: 4;
+            grid-row: 1/2; /* Span two rows */
+            height: 200px; /* Фиксированная высота */
+            display: flex;
+            flex-direction: column;
+            gap: 10px;      
+        }
+        .button-container-single {
+            grid-column: 3;
+            grid-row: 1/2; /* Span two rows */
+            height: 200px; /* Фиксированная высота */
+            display: flex;
+            flex-direction: column;
+            gap: 5px;      
+        }
+        /* Фильтр по инструкторам – занимает 2 строки */
+        .instructor-filter {
+            grid-column: 1;
+            grid-row: 1 ;
+            background-color: #b5eef2c3;
+        }      
+        /* Фильтр по группам – занимает 2 строки */
+        .group-filter {
+            grid-column: 2;
+            grid-row: 1 / 3;
+            background-color: #b5eef2c3;
+        }   
+        .active-filter {
+            grid-column: 1;
+            grid-row: 2;
+            background-color: #b5eef2c3;
+            height: 70px; 
+            display: flex;
+        }
+        /* Блок с радио-кнопками */
+        .active-filter .radio-options {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+        
+        .filter-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .filter-table th, .filter-table td {
+            padding: 4px;
+            text-align: left;
+            border: none;
+        }
+        
+        .filter-table th {
+            font-weight: bold;
+            background-color: transparent;
+        }
+       
+        
+        .table-container {
+            width: 100%;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            table-layout: fixed;
+        }
+
+        .select-all {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            margin: 5px auto;
+        }
+        
+        /* Checkbox styling for row selection */
+        .row-select {
+            width: 20px;
+            height: 20px;
+        }
+        
+        /* Styling for selected row */
+        .selected-row {
+            background-color: #e3f2fd; /* Light blue background */
+            font-weight: bold; /* Make text slightly bolder */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        }
+        
+        /* Styling for dimmed buttons */
+        .button-dimmed {
+            opacity: 0.5; /* Reduce opacity to make it look dimmed */
+            cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+        }
+        
+        /* Override the alternating row color when selected */
+        tr.selected-row:nth-child(even) {
+            background-color: #e3f2fd;
+        }
+        
+        /* Add a pointer cursor to table rows to indicate they're clickable */
+        #students-table tbody tr {
+            cursor: pointer;
+        }

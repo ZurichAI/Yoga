@@ -1,0 +1,80 @@
+header {
+    background-color: #f5f5f5; /* Light gray background */
+    padding: 10px 20px; /* Space inside the header (top/bottom 10px, left/right 20px) */
+    display: flex; /* Arrange items horizontally */
+    justify-content: flex-start; /* Start items from the left */
+    align-items: center; /* Center vertically */
+    border-bottom: 1px solid #e0e0e0; /* Optional: subtle bottom border */
+    max-width: 1200px; /* Limit width to 1200px */
+    margin: 0 auto; /* Center the header */
+}
+
+.logo {
+    display: flex; /* Align icon and text horizontally */
+    align-items: center; /* Center vertically */
+    font-size: 1.5em; /* Bigger text for the logo */
+    font-weight: bold; /* Make it bold */
+    color: #1e90ff; /* Blue color like in the screenshot */
+    margin-right: 20px; /* Space between logo and navigation */
+}
+.logo img {
+    margin-right: 10px; /* Space between icon and text */
+}
+
+.logo .icon {
+    margin-right: 5px; /* Space between icon and text */
+}
+
+nav {
+    display: flex; /* Arrange links horizontally */
+    margin-right: auto; /* Push nav to the left */
+}
+
+nav a {
+    color: #1e90ff; /* Blue links */
+    text-decoration: none; /* Remove underlines */
+    margin-right: 20px; /* Space between links */
+    font-size: 1em; /* Standard text size */
+}
+
+nav a:hover {
+    text-decoration: underline; /* Underline on hover for interactivity */
+}
+
+.current-user {
+    color: #333; /* Dark gray color for username */
+    font-weight: bold; /* Make it bold */
+    margin-left: auto; /* Push to the right */
+    margin-right: 15px; /* Space between username and logout link */
+}
+
+.logout-link {
+    color: #e74c3c; /* Red color for logout */
+    text-decoration: none; /* Remove underlines */
+    font-weight: bold; /* Make it bold */
+}
+
+.logout-link:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+body {
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    text-align: left;
+    background-color: lightgray; /* Светло-серый фон */
+}
+/* Main content - using parameters from students.css */
+.main-content {
+    max-width: 1200px;
+    margin: 5px auto;
+}
+
+h1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}

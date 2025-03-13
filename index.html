@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="description" content="Instructor Portal">
+    <title>Instructor Portal</title>
+    <link rel="stylesheet" href="style/globalStyle.css">
+    <link rel="stylesheet" href="style/index.css">
+</head>
+<body>
+
+    <!-- Login Dialog -->
+    <div class="dialog-overlay" id="login-dialog">
+        <div class="dialog-box">
+            <h3 class="dialog-title">Instructor Login</h3>
+            <div class="dialog-content">
+                <div class="error-message" id="login-error">Invalid login or password</div>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login">Login:</label>
+                        <input type="text" id="login" class="dialog-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" class="dialog-input" required>
+                    </div>
+                    <div class="dialog-buttons">
+                        <button type="submit" id="login-btn">Login</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content (hidden until login) -->
+    <div class="container" id="main-content">
+        <h1 id="welcome-message">Hello, Instructor</h1>
+        <p>With this tool you can:</p>
+        <button class="big-button" onclick="window.location.href='students.html'">Administrate all students</button>
+        <button class="big-button" onclick="window.location.href='payments.html'">Administrate finance</button>
+        <button id="logout-btn" class="big-button">Logout</button>    </div>
+    
+    <script src="js/login.js"></script>
+</body>
+</html>

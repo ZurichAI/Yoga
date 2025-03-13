@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <meta name="description" content="Student Management System">
+    <title>Student Management</title>
+    <link rel="stylesheet" href="style/globalStyle.css">
+    <link rel="stylesheet" href="style/students.css">
+    <!-- Styles moved to external CSS file: style/students.css -->
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="images/logo.png" alt="Logo" style="height: 40px;">
+            <span>Yoga CRM portal</span>
+        </div>
+        <nav>
+            <a href="students.html">Students</a>
+            <a href="payments.html">Payments</a>
+        </nav>
+        <span id="current-user" class="current-user"></span>
+        <a href="index.html" class="logout-link" onclick="logout()">Logout</a>
+    </header>
+    
+    <div class="container">
+        <div class="student-management-header">
+            <h1>Student Management</h1>
+            <div class="search-container">
+                <input type="search" id="search-input" placeholder="Search students...">
+            </div>
+        </div>
+        
+        <div class="filters-container">
+            <!-- Instructor Filter -->
+            <div class="filter-box instructor-filter">
+                <h3>Filter by instructor</h3>
+                <div class="checkbox-container select-all">
+                    <input type="checkbox" id="select-all-instructors" class="instructor-checkbox" checked>
+                    <label for="select-all-instructors">Select all</label>
+                </div>
+                <div id="instructor-checkboxes">
+                    <!-- Will be populated dynamically with a table -->
+                </div>
+            </div>      
+
+            <!-- Group Filter -->
+            <div class="filter-box group-filter">
+                <h3>Filter by Group</h3>
+                <div class="checkbox-container select-all">
+                    <input type="checkbox" id="select-all-groups" class="group-checkbox" checked>
+                    <label for="select-all-groups">Select all</label>
+                </div>
+                <div id="group-checkboxes">
+                    <!-- Will be populated dynamically with a table -->
+                </div>
+            </div>
+            
+            <!-- Active Filter -->
+            <div class="filter-box active-filter">
+                <h3>Active students</h3>
+                
+                <div class="radio-options">
+                    <label>
+                        <input type="radio" id="active-only" name="active-filter" value="active" checked>
+                        Active
+                    </label>
+                    <label>
+                        <input type="radio" id="non-active-only" name="active-filter" value="non-active">
+                        Non active
+                    </label>
+                    <label>
+                        <input type="radio" id="all-students" name="active-filter" value="all">
+                        All
+                    </label>
+                </div>
+            </div>
+        
+            <!-- Buttons -->
+            <div class="button-container-multi">
+                <h3>Any rows action</h3>
+                <button id="clear-filters-btn" >Clear all filters</button>
+                <button id="create-cost-btn" disabled>Create cost</button>
+                <button id="create-contact-btn">Create contact</button>
+            </div>
+
+            <div class="button-container-single">
+                <h3>Single-rows action</h3>
+                <p>Select one row to enable buttons.</p>
+                <button id="create-comment-btn" disabled>Create comment</button>
+                <button id="create-payment-btn" disabled>Create payment</button>
+                <button id="edit-contact-btn" disabled>Edit contact</button>
+                <button id="delete-contact-btn" disabled>Delete contact</button>
+            </div>
+
+        </div>
+       
+        <div class="main-content">
+            <!-- Students Table -->
+            <div class="table-container">
+                <table id="students-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 30px;"><input type="checkbox" id="select-all-rows"></th>
+                            <th data-sort="name">Name</th>
+                            <th data-sort="group">Group</th>
+                            <th data-sort="instructor">Instructor</th>
+                            <th style="width: 90px;" data-sort="birthday">Birthday</th>
+                            <th style="width: 90px;" data-sort="startDate">Start Date</th>
+                            <th style="width: 90px;" data-sort="balance">Balance</th>
+                            <th style="width: 70px;" title="Has dossier records">Comment</th>
+                        </tr>
+                    </thead>
+                    <tbody id="students-table-body">
+                        <!-- Student data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialog for adding comments -->
+    <div class="dialog-overlay" id="comment-dialog">
+        <div class="dialog-box">
+            <h3 class="dialog-title">Add a comment</h3>
+            <div class="dialog-content">
+                <textarea class="dialog-input" id="comment-input" placeholder="Add a comment"></textarea>
+            </div>
+            <div class="dialog-buttons">
+                <button id="cancel-comment-btn">Cancel</button>
+                <button id="save-comment-btn" disabled>Save</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialog for viewing student comments -->
+    <div class="dialog-overlay" id="view-comments-dialog">
+        <div class="dialog-box" style="width: 600px; max-width: 90%;">
+            <h3 class="dialog-title">Student Comments</h3>
+            <div class="dialog-content">
+                <div class="table-container" style="max-height: 300px; overflow-y: auto;">
+                    <table id="student-comments-table" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Timestamp</th>
+                                <th>Record</th>
+                                <th>Created By</th>
+                            </tr>
+                        </thead>
+                        <tbody id="student-comments-table-body">
+                            <!-- Comments will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="dialog-buttons">
+                <button id="add-comment-btn">Add comment</button>
+                <button id="close-comments-btn">Close</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialog for editing student (Dialog Box 1) -->
+    <div class="dialog-overlay" id="edit-student-dialog">
+        <div class="dialog-box" style="width: 500px; max-width: 90%;">
+            <h3 class="dialog-title">Edit Student</h3>
+            <div class="dialog-content">
+                <p>You can update here the information about student</p>
+                <form id="edit-student-form">
+                    <div class="form-group">
+                        <label for="edit-student-id">ID:</label>
+                        <input type="text" id="edit-student-id" class="dialog-input" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-student-name">Name:</label>
+                        <input type="text" id="edit-student-name" class="dialog-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-student-group">Group:</label>
+                        <input type="text" id="edit-student-group" class="dialog-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-student-birthday">Birthday:</label>
+                        <input type="date" id="edit-student-birthday" class="dialog-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-student-instructor">Instructor:</label>
+                        <select id="edit-student-instructor" class="dialog-input" required>
+                            <!-- Will be populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-student-start-date">Start Date:</label>
+                        <input type="date" id="edit-student-start-date" class="dialog-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-student-active">Active:</label>
+                        <input type="checkbox" id="edit-student-active" checked>
+                    </div>
+                </form>
+            </div>
+            <div class="dialog-buttons">
+                <button id="cancel-edit-btn">Cancel</button>
+                <button id="save-edit-btn">Save changes</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialog for confirming edit (Dialog Box 2) -->
+    <div class="dialog-overlay" id="confirm-edit-dialog">
+        <div class="dialog-box" style="width: 500px; max-width: 90%;">
+            <h3 class="dialog-title">Confirm Changes</h3>
+            <div class="dialog-content">
+                <p>Save this data?</p>
+                <div id="edit-confirmation-details">
+                    <!-- Will be populated dynamically -->
+                </div>
+            </div>
+            <div class="dialog-buttons">
+                <button id="cancel-confirm-edit-btn">Cancel</button>
+                <button id="save-confirm-edit-btn">Save</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialog for delete options (Dialog Box 3) -->
+    <div class="dialog-overlay" id="delete-options-dialog">
+        <div class="dialog-box" style="width: 500px; max-width: 90%;">
+            <h3 class="dialog-title">Delete Student</h3>
+            <div class="dialog-content">
+                <p>You can make this student inactive or permanently delete contact</p>
+                <div id="delete-student-details">
+                    <!-- Will be populated dynamically -->
+                </div>
+            </div>
+            <div class="dialog-buttons">
+                <button id="make-inactive-btn">Make inactive</button>
+                <button id="delete-student-btn">Delete</button>
+                <button id="cancel-delete-options-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialog for confirming permanent deletion (Dialog Box 4) -->
+    <div class="dialog-overlay" id="confirm-delete-dialog">
+        <div class="dialog-box" style="width: 500px; max-width: 90%;">
+            <h3 class="dialog-title">Confirm Deletion</h3>
+            <div class="dialog-content">
+                <p>You are going to permanently delete the contact. Are you sure? The operation cannot be undone</p>
+                <div id="confirm-delete-details">
+                    <!-- Will be populated dynamically -->
+                </div>
+            </div>
+            <div class="dialog-buttons">
+                <button id="confirm-delete-btn">Delete</button>
+                <button id="cancel-confirm-delete-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialog for creating student (Dialog Box 5) -->
+    <div class="dialog-overlay" id="create-student-dialog">
+        <div class="dialog-box" style="width: 500px; max-width: 90%;">
+            <h3 class="dialog-title">Create Contact</h3>
+            <div class="dialog-content">
+                <p>Enter information for the new contact</p>
+                <form id="create-student-form">
+                    <div class="form-group">
+                        <label for="create-student-name">Name:</label>
+                        <input type="text" id="create-student-name" class="dialog-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="create-student-group">Group:</label>
+                        <input type="text" id="create-student-group" class="dialog-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="create-student-birthday">Birthday:</label>
+                        <input type="date" id="create-student-birthday" class="dialog-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="create-student-instructor">Instructor:</label>
+                        <select id="create-student-instructor" class="dialog-input" required>
+                            <!-- Will be populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="create-student-start-date">Start Date:</label>
+                        <input type="date" id="create-student-start-date" class="dialog-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="create-student-active">Active:</label>
+                        <input type="checkbox" id="create-student-active" checked>
+                    </div>
+                </form>
+            </div>
+            <div class="dialog-buttons">
+                <button id="cancel-create-btn">Cancel</button>
+                <button id="save-create-btn" disabled>Create contact</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialog for confirming create (Dialog Box 6) -->
+    <div class="dialog-overlay" id="confirm-create-dialog">
+        <div class="dialog-box" style="width: 500px; max-width: 90%;">
+            <h3 class="dialog-title">Confirm Creation</h3>
+            <div class="dialog-content">
+                <p>Create this contact?</p>
+                <div id="create-confirmation-details">
+                    <!-- Will be populated dynamically -->
+                </div>
+            </div>
+            <div class="dialog-buttons">
+                <button id="cancel-confirm-create-btn">Cancel</button>
+                <button id="save-confirm-create-btn">Create contact</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialog for creating payment -->
+    <div class="dialog-overlay" id="create-payment-dialog">
+        <div class="dialog-box" style="width: 500px; max-width: 90%;">
+            <h3 class="dialog-title">Create Payment</h3>
+            <div class="dialog-content">
+                <form id="create-payment-form">
+                    <!-- Date input permanently removed -->
+                    <div class="form-group">
+                        <label for="payment-purpose">Purpose:</label>
+                        <input type="text" id="payment-purpose" class="dialog-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="payment-amount">Amount CHF:</label>
+                        <input type="number" id="payment-amount" class="dialog-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="payment-student">Student Name:</label>
+                        <input type="text" id="payment-student" class="dialog-input" readonly>
+                    </div>
+                </form>
+            </div>
+            <div class="dialog-buttons">
+                <button id="cancel-payment-btn">Cancel</button>
+                <button id="save-payment-dialog-btn" disabled>Create payment</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialog for confirming payment creation -->
+    <div class="dialog-overlay" id="confirm-payment-dialog">
+        <div class="dialog-box" style="width: 500px; max-width: 90%;">
+            <h3 class="dialog-title">Confirm Payment Creation</h3>
+            <div class="dialog-content">
+                <p id="confirm-payment-message"></p>
+                <div id="confirm-payment-details">
+                    <!-- Will be populated dynamically -->
+                </div>
+            </div>
+            <div class="dialog-buttons">
+                <button id="cancel-confirm-payment-btn">No</button>
+                <button id="save-confirm-payment-btn">Yes</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialog for creating cost -->
+    <div class="dialog-overlay" id="create-cost-dialog">
+        <div class="dialog-box" style="width: 600px; max-width: 90%;">
+            <h3 class="dialog-title">Create Cost</h3>
+            <div class="dialog-content">
+                <form id="create-cost-form">
+                    <div class="form-group">
+                        <label for="cost-purpose">Purpose:</label>
+                        <input type="text" id="cost-purpose" class="dialog-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cost-amount">Amount CHF:</label>
+                        <input type="number" id="cost-amount" class="dialog-input" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Students:</label>
+                        <table class="embedded-table" id="cost-students-table">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Group</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cost-students-table-body">
+                                <!-- Will be populated dynamically -->
+                            </tbody>
+                        </table>
+                        <button type="button" id="add-student-btn">+ Add student</button>
+                    </div>
+                </form>
+            </div>
+            <div class="dialog-buttons">
+                <button id="cancel-cost-btn">Cancel</button>
+                <button id="save-cost-btn" disabled>Save cost</button>
+                <button id="save-with-reference-payment-btn" disabled>Save with reference payment</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialog for confirming cost creation -->
+    <div class="dialog-overlay" id="confirm-cost-dialog">
+        <div class="dialog-box" style="width: 600px; max-width: 90%;">
+            <h3 class="dialog-title">Confirm Cost Creation</h3>
+            <div class="dialog-content">
+                <p id="confirm-cost-message"></p>
+                <div id="confirm-cost-details">
+                    <!-- Will be populated dynamically -->
+                </div>
+            </div>
+            <div class="dialog-buttons">
+                <button id="cancel-confirm-cost-btn">No</button>
+                <button id="save-confirm-cost-btn">Yes</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialog for creating payment with reference -->
+    <div class="dialog-overlay" id="create-payment-reference-dialog">
+        <div class="dialog-box" style="width: 600px; max-width: 90%;">
+            <h3 class="dialog-title">Create Payment with Reference</h3>
+            <div class="dialog-content">
+                <form id="create-payment-reference-form">
+                    <div class="form-group">
+                        <label for="payment-ref-purpose">Purpose:</label>
+                        <input type="text" id="payment-ref-purpose" class="dialog-input" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Students:</label>
+                        <table class="embedded-table" id="payment-ref-students-table">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Cost to add</th>
+                                    <th>Payment to add</th>
+                                </tr>
+                            </thead>
+                            <tbody id="payment-ref-students-table-body">
+                                <!-- Will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+            <div class="dialog-buttons">
+                <button id="cancel-payment-ref-btn">Cancel</button>
+                <button id="save-cost-and-payment-btn">Save cost and payment</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Dialog for confirming cost and payment creation -->
+    <div class="dialog-overlay" id="confirm-cost-payment-dialog">
+        <div class="dialog-box" style="width: 600px; max-width: 90%;">
+            <h3 class="dialog-title">Confirm Cost and Payment Creation</h3>
+            <div class="dialog-content">
+                <p id="confirm-cost-payment-message"></p>
+                <div id="confirm-cost-payment-details">
+                    <!-- Will be populated dynamically -->
+                </div>
+            </div>
+            <div class="dialog-buttons">
+                <button id="cancel-confirm-cost-payment-btn">No</button>
+                <button id="save-confirm-cost-payment-btn">Yes</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="js/config.js"></script>
+    <script src="js/studentsInit.js"></script>
+    <script src="js/APIs.js"></script>
+    <script src="js/studentsFilters.js"></script>
+    <script src="js/studentsTable.js"></script>
+    <script src="js/studentComment.js"></script>
+    <script src="js/deleteContact.js"></script>
+    <script src="js/editContact.js"></script>
+    <script src="js/createContact.js"></script>
+    <script src="js/createStudentPayment.js"></script>
+    <script src="js/createCost.js"></script>
+    <script src="js/login.js"></script>
+</body>
+</html>
